@@ -1,15 +1,16 @@
 import { useState } from "react";
 import "./App.css";
+import ImageMap from "./components/ImageMap";
 import Navbar from "./components/Navbar";
 
 function App() {
-  const [count, setCount] = useState(0);
+  const [isAtBottom, setIsAtBottom] = useState(false);
 
   return (
     <>
-      <Navbar />
+      <Navbar isAtBottom={isAtBottom} />
       <div className="">
-        <img src="/images/find-waldo.jpg" alt="find waldo image" />
+        <ImageMap setIsAtBottom={setIsAtBottom} />
       </div>
     </>
   );
