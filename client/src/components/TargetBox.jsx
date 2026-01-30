@@ -3,7 +3,7 @@ import TargetImage from "./TargetImage";
 const TargetBox = ({ position }) => {
   return (
     <div
-      className="flex gap-5 absolute bg-black/90 p-3 rounded-4xl z-50"
+      className="flex gap-5 absolute w-max bg-black/90 p-3 rounded-4xl z-50"
       style={{
         left: position.x,
         top: position.y,

@@ -9,6 +9,15 @@ const ImageMap = ({ setIsAtBottom }) => {
     visible: false,
   });
 
+  const closeMenu = (e) => {
+    if (e) e.stopPropagation();
+
+    setMenuPosition((prev) => ({
+      ...prev,
+      visible: false,
+    }));
+  };
+
   const handleScroll = (e) => {
     const { scrollTop, clientHeight, scrollHeight } = e.currentTarget;
 
@@ -41,6 +50,21 @@ const ImageMap = ({ setIsAtBottom }) => {
       className="fixed inset-0 overflow-auto bg-gray-900"
       onScroll={handleScroll}
     >
+      {menuPosition.visible && (
+        <div
+          className="fixed inset-0 z-40 w-full h-full cursor-default bg-transparent"
+          onClick={closeMenu}
+        >
+          <div
+            className="absolute w-15 h-15 rounded-full shadow-[0_0_0_9999px_rgba(0,0,0,0.8)] pointer-events-none"
+            style={{
+              left: menuPosition.x,
+              top: menuPosition.y,
+              transform: "translate(-50%, -50%)",
+            }}
+          />
+        </div>
+      )}
       <img
         src="/images/find-waldo.jpg"
         alt="Game Map"
