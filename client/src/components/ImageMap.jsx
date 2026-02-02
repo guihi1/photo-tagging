@@ -26,6 +26,10 @@ const ImageMap = ({ setIsAtBottom }) => {
     } else {
       setIsAtBottom(false);
     }
+
+    if (menuPosition.visible) {
+      setMenuPosition((prev) => ({ ...prev, visible: false }));
+    }
   };
 
   const handleMapClick = (e) => {
@@ -50,30 +54,33 @@ const ImageMap = ({ setIsAtBottom }) => {
       className="fixed inset-0 overflow-auto bg-gray-900"
       onScroll={handleScroll}
     >
-      {menuPosition.visible && (
-        <div
-          className="fixed inset-0 z-40 w-full h-full cursor-default bg-transparent"
-          onClick={closeMenu}
-        >
+      <div className="relative min-w-max min-h-max">
+        {menuPosition.visible && (
           <div
-            className="absolute w-15 h-15 rounded-full shadow-[0_0_0_9999px_rgba(0,0,0,0.8)] pointer-events-none"
-            style={{
-              left: menuPosition.x,
-              top: menuPosition.y,
-              transform: "translate(-50%, -50%)",
-            }}
-          />
-        </div>
-      )}
-      <img
-        src="/images/find-waldo.jpg"
-        alt="Game Map"
-        className="block select-none max-w-none w-auto h-auto min-w-250 md:min-w-375"
-        draggable="false"
-        onClick={handleMapClick}
-      />
+            className="absolute inset-0 z-40 w-full h-full"
+            onClick={closeMenu}
+          >
+            <div
+              className="absolute w-15 h-15 rounded-full shadow-[0_0_0_9999px_rgba(0,0,0,0.8)] pointer-events-none"
+              style={{
+                left: menuPosition.x,
+                top: menuPosition.y,
+                transform: "translate(-50%, -50%)",
+              }}
+            />
+          </div>
+        )}
 
-      {menuPosition.visible && <TargetBox position={menuPosition} />}
+        <img
+          src="/images/find-waldo.jpg"
+          alt="Game Map"
+          className="block select-none pointer-events-auto cursor-crosshair min-w-250 md:min-w-375"
+          onClick={handleMapClick}
+          draggable="false"
+        />
+
+        {menuPosition.visible && <TargetBox position={menuPosition} />}
+      </div>
     </div>
   );
 };
