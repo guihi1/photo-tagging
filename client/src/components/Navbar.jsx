@@ -1,4 +1,5 @@
 import ProfileImage from "./ProfileImage";
+import Timer from "./Timer";
 
 const Navbar = ({ isAtBottom }) => {
 	return (
@@ -13,7 +14,7 @@ const Navbar = ({ isAtBottom }) => {
 					<ProfileImage filepath="/images/find3.png" />
 				</div>
 				<div className="flex items-center gap-5">
-					<div>Placeholder</div>
+					<Timer gameOver={false} />
 					<button type="button">Leaderboard</button>
 				</div>
 			</div>
