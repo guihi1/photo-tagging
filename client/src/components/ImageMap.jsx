@@ -1,7 +1,12 @@
 import { useState } from "react";
 import TargetBox from "./TargetBox";
 
-const ImageMap = ({ setIsAtBottom }) => {
+const ImageMap = ({
+	setIsAtBottom,
+	foundCharacters,
+	onFound,
+	allCharacters,
+}) => {
 	const [position, setPosition] = useState([0, 0]);
 	const [menuPosition, setMenuPosition] = useState({
 		x: 0,
@@ -79,7 +84,14 @@ const ImageMap = ({ setIsAtBottom }) => {
 					draggable="false"
 				/>
 
-				{menuPosition.visible && <TargetBox position={menuPosition} />}
+				{menuPosition.visible && (
+					<TargetBox
+						foundCharacters={foundCharacters}
+						onFound={onFound}
+						position={menuPosition}
+						characters={allCharacters}
+					/>
+				)}
 			</div>
 		</div>
 	);

@@ -1,8 +1,12 @@
-const ProfileImage = ({ filepath }) => {
+const ProfileImage = ({ filepath, isFound }) => {
 	return (
 		<img
-			className="rounded-full w-12 h-12 border-3 border-b-cyan-100"
 			src={filepath}
+			alt="character"
+			className={`
+        rounded-full w-12 h-12 object-cover border-2 transition-all duration-500
+      	${isFound ? "opacity-40 grayscale border-gray-600 scale-90" : "border-white shadow-lg scale-100"}
+      `}
 		/>
 	);
 };
