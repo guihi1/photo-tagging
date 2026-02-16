@@ -6,7 +6,7 @@ import { CHARACTERS } from "./data";
 
 function App() {
   const [isAtBottom, setIsAtBottom] = useState(false);
-  const [foundCharacters, setFoundCharacters] = useState(["waldo"]);
+  const [foundCharacters, setFoundCharacters] = useState([]);
   const [gameOver, setGameOver] = useState(false);
 
   useEffect(() => {

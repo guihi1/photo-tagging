@@ -14,6 +14,35 @@ const ImageMap = ({
 		visible: false,
 	});
 
+	const validateGuess = async (characterId) => {
+		const payload = {
+			characterId: characterId,
+			x: position[0],
+			y: position[1],
+		};
+
+		try {
+			const response = await fetch("http://localhost:3000/game/validate", {
+				method: "POST",
+				headers: { "Content-Type": "application/json" },
+				body: JSON.stringify(payload),
+			});
+
+			const result = await response.json();
+
+			if (result.found) {
+				onFound(characterId);
+				alert("VOCÊ ACHOU!");
+			} else {
+				alert("Não é ele! Tente de novo.");
+			}
+		} catch (error) {
+			console.error("Erro ao validar:", error);
+		}
+
+		setMenuPosition({ ...menuPosition, visible: false });
+	};
+
 	const closeMenu = (e) => {
 		if (e) e.stopPropagation();
 
@@ -87,7 +116,7 @@ const ImageMap = ({
 				{menuPosition.visible && (
 					<TargetBox
 						foundCharacters={foundCharacters}
-						onFound={onFound}
+						onFound={validateGuess}
 						position={menuPosition}
 						characters={allCharacters}
 					/>
