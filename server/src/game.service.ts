@@ -4,6 +4,8 @@ import { Injectable } from "@nestjs/common";
 export class GameService {
 	private readonly characters = {
 		waldo: { x: 49, y: 42, radius: 5 },
+		man: { x: 77, y: 78, radius: 5 },
+		yeti: { x: 93, y: 11, radius: 5 },
 	};
 
 	validate(guess: any) {
