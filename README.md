@@ -19,5 +19,5 @@ Make sure you have the following installed:
 
 ### 2. Clone the Repository
 ```bash
-git clone [https://github.com/YOUR_USERNAME/photo-tagging.git](https://github.com/YOUR_USERNAME/photo-tagging.git)
+git clone [https://github.com/guihi1/photo-tagging.git](https://github.com/guihi1/photo-tagging.git)
 cd photo-tagging
