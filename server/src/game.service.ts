@@ -1,22 +1,22 @@
 import { Injectable } from "@nestjs/common";
+import { PrismaService } from "./prisma.service";
+import { CreateGuessDto } from "./create-guess.dto";
 
 @Injectable()
 export class GameService {
-	private readonly characters = {
-		waldo: { x: 49, y: 42, radius: 5 },
-		man: { x: 77, y: 78, radius: 5 },
-		yeti: { x: 93, y: 11, radius: 5 },
-	};
+	constructor(private prisma: PrismaService) {}
 
-	validate(guess: any) {
-		const target = this.characters[guess.characterId];
+	async validate(guess: CreateGuessDto) {
+		const target = await this.prisma.character.findUnique({
+			where: { name: guess.characterId },
+		});
 		if (!target) return { found: false };
 
 		const xDiff = Math.abs(guess.x - target.x);
 		const yDiff = Math.abs(guess.y - target.y);
 
 		if (xDiff <= target.radius && yDiff <= target.radius) {
-			return { found: true, message: "You found him!" };
+			return { found: true };
 		}
 
 		return { found: false };
