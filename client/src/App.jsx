@@ -8,12 +8,47 @@ function App() {
   const [isAtBottom, setIsAtBottom] = useState(false);
   const [foundCharacters, setFoundCharacters] = useState([]);
   const [gameOver, setGameOver] = useState(false);
+  const [sessionId, setSessionId] = useState(null);
 
   useEffect(() => {
-    if (foundCharacters.length === CHARACTERS.length && CHARACTERS.length > 0) {
+    const startSession = async () => {
+      try {
+        const response = await fetch("http://localhost:3000/game/start", {
+          method: "POST",
+        });
+        const data = await response.json();
+        setSessionId(data.sessionId);
+      } catch (error) {
+        console.error("Failed to start game session on backend", error);
+      }
+    };
+
+    startSession();
+  }, []);
+
+  useEffect(() => {
+    const endGame = async () => {
+      try {
+        const response = await fetch("http://localhost:3000/game/end", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ sessionId }),
+        });
+        const result = await response.json();
+      } catch (error) {
+        console.error("Failed to end game session on backend", error);
+      }
+    };
+
+    if (
+      !gameOver &&
+      foundCharacters.length === CHARACTERS.length &&
+      CHARACTERS.length > 0
+    ) {
       setGameOver(true);
+      endGame();
     }
-  }, [foundCharacters]);
+  }, [foundCharacters, gameOver, sessionId]);
 
   const handleCharacterFound = (characterId) => {
     if (!foundCharacters.includes(characterId)) {
@@ -35,6 +70,7 @@ function App() {
           foundCharacters={foundCharacters}
           onFound={handleCharacterFound}
           allCharacters={CHARACTERS}
+          sessionId={sessionId}
         />
       </div>
 

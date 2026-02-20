@@ -6,6 +6,7 @@ const ImageMap = ({
 	foundCharacters,
 	onFound,
 	allCharacters,
+	sessionId,
 }) => {
 	const [position, setPosition] = useState([0, 0]);
 	const [menuPosition, setMenuPosition] = useState({
@@ -16,7 +17,7 @@ const ImageMap = ({
 
 	const validateGuess = async (characterId) => {
 		const payload = {
-			characterId: characterId,
+			characterId,
 			x: position[0],
 			y: position[1],
 		};
