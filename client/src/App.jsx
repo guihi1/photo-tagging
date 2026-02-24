@@ -3,6 +3,7 @@ import "./App.css";
 import ImageMap from "./components/ImageMap";
 import Navbar from "./components/Navbar";
 import { CHARACTERS } from "./data";
+import Leaderboard from "./components/Leaderboard";
 
 function App() {
   const [isAtBottom, setIsAtBottom] = useState(false);
@@ -63,7 +64,6 @@ function App() {
         foundCharacters={foundCharacters}
         allCharacters={CHARACTERS}
       />
-
       <div className="">
         <ImageMap
           setIsAtBottom={setIsAtBottom}
@@ -73,20 +73,29 @@ function App() {
           sessionId={sessionId}
         />
       </div>
-
       {gameOver && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/80">
-          <div className="bg-white p-10 rounded text-center">
-            <h1 className="text-4xl font-bold mb-4">VITÓRIA!</h1>
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-sm p-4 transition-all duration-500">
+          <div className="bg-gray-950 border border-gray-800 p-8 md:p-12 rounded-2xl shadow-[0_0_50px_rgba(0,0,0,0.7)] text-center flex flex-col items-center max-w-lg w-full animate-fade-in-up">
+            <h1 className="text-5xl md:text-6xl font-black mb-2 tracking-tight text-transparent bg-clip-text bg-linear-to-br from-green-400 to-emerald-600 drop-shadow-sm">
+              Victory!
+            </h1>
+            <p className="text-gray-400 mb-8 font-medium tracking-wide">
+              You found all characters!
+            </p>
+
+            <div className="w-full mb-8">
+              <Leaderboard />
+            </div>
+
             <button
               onClick={() => window.location.reload()}
-              className="bg-red-500 text-white px-4 py-2 rounded"
+              className="group relative px-8 py-4 font-bold text-white text-lg rounded-full bg-gradient-to-r from-red-600 to-rose-600 hover:from-red-500 hover:to-rose-500 transition-all duration-300 shadow-[0_0_20px_rgba(225,29,72,0.4)] hover:shadow-[0_0_30px_rgba(225,29,72,0.7)] hover:-translate-y-1 w-full sm:w-auto"
             >
-              Jogar Novamente
+              Play again
             </button>
           </div>
         </div>
-      )}
+      )}{" "}
     </>
   );
 }

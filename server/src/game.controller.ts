@@ -1,4 +1,4 @@
-import { Controller, Post, Body } from "@nestjs/common";
+import { Controller, Post, Body, Get } from "@nestjs/common";
 import { GameService } from "./game.service";
 import { CreateGuessDto } from "./create-guess.dto";
 
@@ -21,4 +21,8 @@ export class AppController {
     return this.gameService.end(sessionId);
   }
 
+  @Get('leaderboard')
+  async getLeaderboard() {
+    return this.gameService.getLeaderboard();
+  }
 }

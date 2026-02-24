@@ -54,4 +54,24 @@ export class GameService {
 			finalTime: durationInSeconds,
 		};
 	}
+
+	async getLeaderboard() {
+		const topScores = await this.prisma.gameSession.findMany({
+			where: {
+				score: { not: null },
+			},
+			orderBy: {
+				score: "asc",
+			},
+			take: 10,
+			select: {
+				id: true,
+				playerName: true,
+				score: true,
+				endTime: true,
+			},
+		});
+
+		return topScores;
+	}
 }
