@@ -89,7 +89,7 @@ function App() {
 
             <button
               onClick={() => window.location.reload()}
-              className="group relative px-8 py-4 font-bold text-white text-lg rounded-full bg-gradient-to-r from-red-600 to-rose-600 hover:from-red-500 hover:to-rose-500 transition-all duration-300 shadow-[0_0_20px_rgba(225,29,72,0.4)] hover:shadow-[0_0_30px_rgba(225,29,72,0.7)] hover:-translate-y-1 w-full sm:w-auto"
+              className="group relative px-8 py-4 font-bold text-white text-lg rounded-full bg-linear-to-r from-red-600 to-rose-600 hover:from-red-500 hover:to-rose-500 transition-all duration-300 shadow-[0_0_20px_rgba(225,29,72,0.4)] hover:shadow-[0_0_30px_rgba(225,29,72,0.7)] hover:-translate-y-1 w-full sm:w-auto"
             >
               Play again
             </button>

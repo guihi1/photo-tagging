@@ -37,70 +37,73 @@ const Leaderboard = () => {
       <h2 className="text-3xl font-black text-center mb-6 tracking-wider text-transparent bg-clip-text bg-linear-to-r from-cyan-400 to-blue-500">
         LEADERBOARD
       </h2>
+      <div className="max-h-[40vh] overflow-y-auto pr-2 custom-scrollbar">
+        <ul className="space-y-2">
+          {displaySlots.map((_, index) => {
+            const entry = scores[index];
+            const rank = index + 1;
 
-      <ul className="space-y-3">
-        {displaySlots.map((_, index) => {
-          const entry = scores[index];
-          const rank = index + 1;
+            let rankStyle = "text-gray-400 font-medium";
+            let borderStyle = "border-gray-700 bg-gray-800";
 
-          let rankStyle = "text-gray-400 font-medium";
-          let borderStyle = "border-gray-700 bg-gray-800";
-
-          if (entry) {
-            if (rank === 1) {
-              rankStyle = "text-yellow-400 font-bold text-xl drop-shadow-md";
-              borderStyle =
-                "border-yellow-500/40 bg-yellow-500/10 shadow-[0_0_15px_rgba(234,179,8,0.15)]";
-            } else if (rank === 2) {
-              rankStyle = "text-gray-300 font-bold text-lg drop-shadow";
-              borderStyle = "border-gray-400/40 bg-gray-400/10";
-            } else if (rank === 3) {
-              rankStyle = "text-amber-600 font-bold text-lg drop-shadow";
-              borderStyle = "border-amber-700/40 bg-amber-700/10";
+            if (entry) {
+              if (rank === 1) {
+                rankStyle = "text-yellow-400 font-bold text-xl drop-shadow-md";
+                borderStyle =
+                  "border-yellow-500/40 bg-yellow-500/10 shadow-[0_0_15px_rgba(234,179,8,0.15)]";
+              } else if (rank === 2) {
+                rankStyle = "text-gray-300 font-bold text-lg drop-shadow";
+                borderStyle = "border-gray-400/40 bg-gray-400/10";
+              } else if (rank === 3) {
+                rankStyle = "text-amber-600 font-bold text-lg drop-shadow";
+                borderStyle = "border-amber-700/40 bg-amber-700/10";
+              }
             }
-          }
 
-          return (
-            <li
-              key={entry ? entry.id : `empty-${index}`}
-              className={`flex justify-between items-center p-3 rounded-lg border transition-all duration-300 ${entry
-                  ? borderStyle
-                  : "border-dashed border-gray-800 bg-transparent"
-                }`}
-            >
-              <div className="flex items-center gap-4">
-                <span className={`w-8 text-center ${rankStyle}`}>
-                  {rank === 1 && entry
-                    ? "🥇"
-                    : rank === 2 && entry
-                      ? "🥈"
-                      : rank === 3 && entry
-                        ? "🥉"
-                        : `${rank}º`}
-                </span>
+            return (
+              <li
+                key={entry ? entry.id : `empty-${index}`}
+                className={`flex justify-between items-center py-2 px-3 rounded-lg border transition-all duration-300 ${entry
+                    ? borderStyle
+                    : "border-dashed border-gray-800 bg-transparent"
+                  }`}
+              >
+                <div className="flex items-center gap-3">
+                  {" "}
+                  <span className={`w-8 text-center ${rankStyle}`}>
+                    {rank === 1 && entry
+                      ? "🥇"
+                      : rank === 2 && entry
+                        ? "🥈"
+                        : rank === 3 && entry
+                          ? "🥉"
+                          : `${rank}º`}
+                  </span>
+                  <span
+                    className={
+                      entry
+                        ? "text-gray-200 font-medium tracking-wide truncate max-w-30"
+                        : "text-gray-700 italic"
+                    }
+                  >
+                    {entry ? entry.playerName || "Anonymous" : "---"}
+                  </span>
+                </div>
 
-                <span
-                  className={
-                    entry
-                      ? "text-gray-200 font-medium tracking-wide"
-                      : "text-gray-700 italic"
-                  }
-                >
-                  {entry ? entry.playerName || "Anonymous" : "---"}
-                </span>
-              </div>
-
-              {entry ? (
-                <span className="font-mono text-cyan-400 bg-cyan-950/50 border border-cyan-900 px-2 py-1 rounded text-sm tracking-wider">
-                  {entry.score.toFixed(2)}s
-                </span>
-              ) : (
-                <span className="font-mono text-gray-700 text-sm">--.--s</span>
-              )}
-            </li>
-          );
-        })}
-      </ul>
+                {entry ? (
+                  <span className="font-mono text-cyan-400 bg-cyan-950/50 border border-cyan-900 px-2 py-1 rounded text-sm tracking-wider">
+                    {entry.score.toFixed(2)}s
+                  </span>
+                ) : (
+                  <span className="font-mono text-gray-700 text-sm">
+                    --.--s
+                  </span>
+                )}
+              </li>
+            );
+          })}
+        </ul>
+      </div>
     </div>
   );
 };
